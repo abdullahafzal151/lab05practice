@@ -1,6 +1,6 @@
 public class ScreenDemo{
 	public static void main(String[] args){
-		Screen screen = new Screen();
+		Screen screen = new Screen("Screen 01");
 		
 		screen.findById("8-007");
 		screen.findByCoordinates(2,4);
@@ -18,6 +18,13 @@ public class ScreenDemo{
 		System.out.println();
 		System.out.println("===Count By Type===");
 		screen.countByType();
+		
+		System.out.println(screen.getScreen());
+		
+		System.out.println(screen.getSeat("8-007"));
+		
+		//screen.setRowType(1, SeatType.PREMIUM, 750);
+		System.out.println(screen.toString());
 
 	
 	}

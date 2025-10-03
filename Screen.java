@@ -3,7 +3,18 @@ public class Screen{
 	Seat seats[][] = new Seat[10][];
 	SeatType type;
 	double price;
+	String screenName;
 	
+	Seat regularSeats[] = new Seat[10];
+	Seat vipSeats[] = new Seat[10];
+	Seat premiumSeats[] = new Seat[10];
+	Seat reclinerSeats[] = new Seat[10];
+	
+	
+	Screen(String screenName){
+		this();
+		this.screenName = screenName;
+	}
 		
 	Screen(){
 	
@@ -35,7 +46,7 @@ public class Screen{
 	public void findById(String id){
 		for(int i = 0; i < seats.length; i++){
 			for(int j = 0; j < seats[i].length; j++){
-				if(seats[i][j].id.equals(id)){
+				if(seats[i][j].getId().equals(id)){
 					System.out.println("Seat Of this id is found "+ seats[i][j]);
 					return;
 				}
@@ -55,7 +66,7 @@ public class Screen{
 	public void booked(String id){
 		for(int i = 0; i < seats.length; i++){
 			for(int j = 0; j < seats[i].length; j++){
-				if(seats[i][j].id.equals(id)){
+				if(seats[i][j].getId().equals(id)){
 					if(seats[i][j].isAvailable == true){
 						System.out.println("The seat you want is available and we book for you");
 						seats[i][j].isAvailable = false;
@@ -73,7 +84,7 @@ public class Screen{
 	public void cancelSeat(String id){
 		for(int i = 0; i < seats.length; i++){
 			for(int j = 0; j < seats[i].length; j++){
-				if(seats[i][j].id.equals(id)){
+				if(seats[i][j].getId().equals(id)){
 					if(seats[i][j].isAvailable == false){
 						System.out.println("The seat has been successfully canceled");
 						seats[i][j].isAvailable = true;
@@ -137,6 +148,44 @@ public class Screen{
 
 	
 	}
+	
+	//public Seat getSeats(SeatType type, int n){
+		
+		//for(int i = 0; i < seats[i].length; i++){
+			//for(int j = 0; j < seats[i].length; j++){
+				//if(seats[i][j].type == SeatType.REGULAR)
+					//regularSeats[i];
+			
+			//}
+		
+		//}
+	//}
+	
+	public String getScreen(){
+		return screenName;
+	}
+	
+	public Seat getSeat(String id){
+	
+		for(int i = 0; i < seats.length; i++){
+			for(int j = 0; j < seats[i].length; j++){
+				if(seats[i][j].getId().equals(id)){
+					return seats[i][j];
+					}
+				}
+			}
+			return null;
+		
+	}
+	
+	public void setRowType(int row, SeatType type, double price){
+		for(int j = 0; j < seats[row].length; j++){
+			seats[row][j].type = type;
+			seats[row][j].price = price;
+		}
+	
+	}
+	
 	
 	@Override
 	public String toString(){

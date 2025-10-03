@@ -1,6 +1,6 @@
 public class Seat{
 
-	String id;
+	private String id;
 	SeatType type;
 	double price;
 	boolean isAvailable;
@@ -27,6 +27,19 @@ public class Seat{
 		return cols;
 	}
 	
+	public SeatType getSeatType(){
+		return type;
+	}
+	
+	public void setId(String id){
+		this.id = id;
+	}
+	
+	public String getId(){
+		return id;
+	}
+	
+	
 	@Override
 	public String toString(){
 		return String.format("%s %s %.2f %b \n",id,type,price,isAvailable);
@@ -39,7 +52,5 @@ public class Seat{
 		return rows == seat.rows && cols == seat.cols;
 		
 	}
-
-
 
 }
