@@ -23,8 +23,8 @@ public class ScreenDemo{
 		
 		System.out.println(screen.getSeat("8-007"));
 		
-		//screen.setRowType(1, SeatType.PREMIUM, 750);
-		System.out.println(screen.toString());
+		screen.setRowType(1, SeatType.PREMIUM, 750);
+		//System.out.println(screen.toString());
 
 	
 	}

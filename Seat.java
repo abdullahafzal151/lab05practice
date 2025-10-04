@@ -1,9 +1,9 @@
 public class Seat{
 
 	private String id;
-	SeatType type;
-	double price;
-	boolean isAvailable;
+	private SeatType type;
+	private double price;
+	private boolean isAvailable;
 	
 	int rows;
 	int cols;
@@ -27,6 +27,10 @@ public class Seat{
 		return cols;
 	}
 	
+	public void setSeatType(SeatType type){
+		this.type = type;
+	}
+	
 	public SeatType getSeatType(){
 		return type;
 	}
@@ -39,10 +43,26 @@ public class Seat{
 		return id;
 	}
 	
+	public void setPrice(double price){
+		this.price = price;
+	}
+	
+	public double getPrice(){
+		return price;
+	}
+	
+	public void setIsavailable(boolean isAvailable){
+		this.isAvailable = isAvailable;
+	}
+	
+	public boolean getIsavailable(){
+		return isAvailable;
+	}
+	
 	
 	@Override
 	public String toString(){
-		return String.format("%s %s %.2f %b \n",id,type,price,isAvailable);
+		return String.format("%s--%s--%.2f--%b \n",id,type,price,isAvailable);
 	
 	}
 	

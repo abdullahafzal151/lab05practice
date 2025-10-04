@@ -67,9 +67,9 @@ public class Screen{
 		for(int i = 0; i < seats.length; i++){
 			for(int j = 0; j < seats[i].length; j++){
 				if(seats[i][j].getId().equals(id)){
-					if(seats[i][j].isAvailable == true){
+					if(seats[i][j].getIsavailable() == true){
 						System.out.println("The seat you want is available and we book for you");
-						seats[i][j].isAvailable = false;
+						seats[i][j].setIsavailable(false);
 						return;
 					} else
 						System.out.println("Seat already booked!");
@@ -85,9 +85,9 @@ public class Screen{
 		for(int i = 0; i < seats.length; i++){
 			for(int j = 0; j < seats[i].length; j++){
 				if(seats[i][j].getId().equals(id)){
-					if(seats[i][j].isAvailable == false){
+					if(seats[i][j].getIsavailable() == false){
 						System.out.println("The seat has been successfully canceled");
-						seats[i][j].isAvailable = true;
+						seats[i][j].setIsavailable(true);
 						return;
 					} else
 						System.out.println("Seat is already not booked");
@@ -115,7 +115,7 @@ public class Screen{
 		
 		for(int i = 0; i < seats.length; i++){
 			for(int j = 0; j < seats[i].length; j++){
-				if(seats[i][j].isAvailable == true)
+				if(seats[i][j].getIsavailable() == true)
 					totalAvailableCount++;
 			}	
 		}
@@ -131,13 +131,13 @@ public class Screen{
 		int reclinerCount = 0;
 		for(int i = 0; i < seats.length; i++){
 			for(int j = 0; j < seats[i].length; j++){
-				if(seats[i][j].type == SeatType.REGULAR)
+				if(seats[i][j].getSeatType() == SeatType.REGULAR)
 					regularCount++;
-				else if(seats[i][j].type == SeatType.PREMIUM)
+				else if(seats[i][j].getSeatType() == SeatType.PREMIUM)
 					premiumCount++;
-				else if(seats[i][j].type == SeatType.VIP)
+				else if(seats[i][j].getSeatType() == SeatType.VIP)
 					vipCount++;
-				else if(seats[i][j].type == SeatType.RECLINER)
+				else if(seats[i][j].getSeatType() == SeatType.RECLINER)
 					reclinerCount++;
 			}
 		}
@@ -180,8 +180,8 @@ public class Screen{
 	
 	public void setRowType(int row, SeatType type, double price){
 		for(int j = 0; j < seats[row].length; j++){
-			seats[row][j].type = type;
-			seats[row][j].price = price;
+			seats[row][j].setSeatType(type);
+        		seats[row][j].setPrice(price);
 		}
 	
 	}

@@ -5,7 +5,7 @@ public class CinemaCity{
 	
 	CinemaCity(String cityName){
 		for(int i = 0; i < cinemas.length; i++)
-			cinemas[i] = new Cinema("Cinema "+i, 5);
+			cinemas[i] = new Cinema("===========================Cinema "+(i+1)+"=======================================================", 5);
 			
 		this.cityName = cityName;
 	}
