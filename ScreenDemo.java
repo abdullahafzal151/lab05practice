@@ -25,6 +25,17 @@ public class ScreenDemo{
 		
 		screen.setRowType(1, SeatType.PREMIUM, 750);
 		//System.out.println(screen.toString());
+		
+		
+		System.out.println("=====Checking Get Seat By Row And Col");
+		System.out.println(screen.getSeat(2, 5));
+		System.out.println("The type of seat you want at first 1st priority is: \n"+ screen.findFirstAvailable(SeatType.PREMIUM));
+		
+		System.out.println("======CHECKING LIST AVAILABLE METHOD");
+		Seat result[] = screen.listAvailable(SeatType.PREMIUM);
+		for (int i = 0; i < result.length; i++) {
+    			System.out.println(result[i]);
+			}
 
 	
 	}

@@ -4,13 +4,8 @@ public class Screen{
 	SeatType type;
 	double price;
 	String screenName;
-	
-	Seat regularSeats[] = new Seat[10];
-	Seat vipSeats[] = new Seat[10];
-	Seat premiumSeats[] = new Seat[10];
-	Seat reclinerSeats[] = new Seat[10];
-	
-	
+		
+	//Constructor For Only ScreenName
 	Screen(String screenName){
 		this();
 		this.screenName = screenName;
@@ -42,7 +37,7 @@ public class Screen{
 		}
 	}
 	
-	
+	//Finding Seat By Its Id
 	public void findById(String id){
 		for(int i = 0; i < seats.length; i++){
 			for(int j = 0; j < seats[i].length; j++){
@@ -55,7 +50,7 @@ public class Screen{
 		System.out.println("Not Found");
 		
 	}
-	
+	//Finding Seat By Its Coordinates
 	public void findByCoordinates(int row, int col){
 	
 		Seat seat = seats[row][col]; 
@@ -63,6 +58,7 @@ public class Screen{
 		
 	}
 	
+	//Booked the Seat
 	public void booked(String id){
 		for(int i = 0; i < seats.length; i++){
 			for(int j = 0; j < seats[i].length; j++){
@@ -81,6 +77,7 @@ public class Screen{
 		System.out.println("Not found the seat of this id");
 	}
 	
+	//Canceling the Seat
 	public void cancelSeat(String id){
 		for(int i = 0; i < seats.length; i++){
 			for(int j = 0; j < seats[i].length; j++){
@@ -89,15 +86,17 @@ public class Screen{
 						System.out.println("The seat has been successfully canceled");
 						seats[i][j].setIsavailable(true);
 						return;
-					} else
+					} else{
 						System.out.println("Seat is already not booked");
 						return;
+						}
 				}
 			}
 		}
 		System.out.println("Not found the seat of this id");
 	}
 	
+	//Count Total Number Of Seats
 	public void countTotalSeats(){
 		int totalSeatsCount = 0;
 		
@@ -109,6 +108,7 @@ public class Screen{
 		System.out.println("Total Number of Seats Are: "+totalSeatsCount);
 	}
 	
+	//Count total Available Seats	
 	public void countAvailableSeats(){
 	
 		int totalAvailableCount = 0;
@@ -124,6 +124,7 @@ public class Screen{
 	
 	}
 	
+	//Count Seats By their Types
 	public void countByType(){
 		int regularCount = 0;
 		int premiumCount = 0;
@@ -149,18 +150,8 @@ public class Screen{
 	
 	}
 	
-	//public Seat getSeats(SeatType type, int n){
 		
-		//for(int i = 0; i < seats[i].length; i++){
-			//for(int j = 0; j < seats[i].length; j++){
-				//if(seats[i][j].type == SeatType.REGULAR)
-					//regularSeats[i];
-			
-			//}
-		
-		//}
-	//}
-	
+	//Returning a Single Screen
 	public String getScreen(){
 		return screenName;
 	}
@@ -178,6 +169,20 @@ public class Screen{
 		
 	}
 	
+	//Returning a Single Seat
+	public Seat getSeat(int row, int col){
+		for(int i = 0; i < seats.length; i++){
+			for(int j = 0; j < seats[i].length; j++){
+				if(seats[i][j].getRows() == row && seats[i][j].getCols() == col){
+					return seats[i][j];
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	//Changing The Entire Row
 	public void setRowType(int row, SeatType type, double price){
 		for(int j = 0; j < seats[row].length; j++){
 			seats[row][j].setSeatType(type);
@@ -186,6 +191,44 @@ public class Screen{
 	
 	}
 	
+	//Finding First Available Seat
+	public Seat findFirstAvailable(SeatType type){
+		for(int i = 0; i < seats.length; i++){
+			for(int j = 0; j < seats[i].length; j++){
+				if(seats[i][j].getSeatType() == type){
+					return seats[i][j];
+				}
+			}
+		}
+		return null;
+	}
+	
+	//Returning an Array of the specific Type 
+	public Seat[] listAvailable(SeatType type){
+		int count = 0;	
+		for(int i = 0; i < seats.length; i++){
+			for(int j = 0; j < seats[i].length; j++){
+				if(seats[i][j].getSeatType() == type){
+					count++;
+				}	
+			}
+		}
+		
+		Seat availableSeats[] = new Seat[count];
+		int index = 0;
+		
+		for(int i = 0; i < seats.length; i++){
+			for(int j = 0; j < seats[i].length; j++){
+				if(seats[i][j].getSeatType() == type){
+					availableSeats[index] = seats[i][j];
+					index++;
+				}
+			}
+		
+		}
+		return availableSeats;
+	}
+
 	
 	@Override
 	public String toString(){
