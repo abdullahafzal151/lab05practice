@@ -62,7 +62,8 @@ public class Seat{
 	
 	@Override
 	public String toString(){
-		return String.format("%s--%s--%.2f--%b \n",id,type,price,isAvailable);
+		return String.format("%s [%s $%.2f %s]", id, type, price, isAvailable ? "A" : "X");
+
 	
 	}
 	

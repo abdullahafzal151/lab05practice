@@ -4,16 +4,16 @@ public class ScreenDemo{
 		
 		screen.findById("8-007");
 		screen.findByCoordinates(2,4);
-		screen.booked("8-007");
-		screen.cancelSeat("8-007");
+		//screen.booked("8-007");
+		//screen.cancelSeat("8-007");
 		
 		System.out.println("===Total Seats Are====");
-		screen.countTotalSeats();
+		System.out.println(screen.getTotalSeatCount());
 		
 		System.out.println();
 		System.out.println("===Total Available Seats Are====");
 		
-		screen.countAvailableSeats();
+		System.out.println(screen.getAvailableSeatCount());
 		
 		System.out.println();
 		System.out.println("===Count By Type===");
@@ -36,6 +36,10 @@ public class ScreenDemo{
 		for (int i = 0; i < result.length; i++) {
     			System.out.println(result[i]);
 			}
+			
+		
+		System.out.println();
+		screen.displayLayout();	
 
 	
 	}

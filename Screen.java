@@ -10,6 +10,37 @@ public class Screen{
 		this();
 		this.screenName = screenName;
 	}
+	
+	//Constructor for custom row lenght screens
+	Screen(String screenName, int [] rowLength){
+		this.screenName = screenName;
+		
+		seats = new Seat[rowLength.length][];
+	
+		for(int i = 0; i < seats.length; i++){
+			seats[i] = new Seat[rowLength[i]];
+			for(int j = 0; j < rowLength[i]; j++){
+			
+			if(i < 2){
+				type = SeatType.REGULAR;
+				price = 500;
+			} else if(i >=2 && i <=5){
+				type = SeatType.PREMIUM;
+				price = 750;
+			} else if(i > 5 && i < 9){
+				type = SeatType.VIP;
+				price = 1000;
+			} else if(i == 9){
+				type = SeatType.RECLINER;
+				price = 1200;
+			}
+			
+			seats[i][j] = new Seat(i, j, type, price, true);	
+			
+			}
+		}
+	
+	}
 		
 	Screen(){
 	
@@ -59,45 +90,43 @@ public class Screen{
 	}
 	
 	//Booked the Seat
-	public void booked(String id){
-		for(int i = 0; i < seats.length; i++){
-			for(int j = 0; j < seats[i].length; j++){
-				if(seats[i][j].getId().equals(id)){
-					if(seats[i][j].getIsavailable() == true){
-						System.out.println("The seat you want is available and we book for you");
-						seats[i][j].setIsavailable(false);
-						return;
-					} else
-						System.out.println("Seat already booked!");
-						return;
-				}
-					
-			}
+	public boolean bookSeat(int row, int col){
+	
+		if(seats[row][col].getIsavailable()){
+			seats[row][col].setIsavailable(false);
+			return true;
+		} else{
+			System.out.println("Seat Already Booked");
+			return false;
 		}
-		System.out.println("Not found the seat of this id");
+	
+	
 	}
 	
 	//Canceling the Seat
-	public void cancelSeat(String id){
-		for(int i = 0; i < seats.length; i++){
-			for(int j = 0; j < seats[i].length; j++){
-				if(seats[i][j].getId().equals(id)){
-					if(seats[i][j].getIsavailable() == false){
-						System.out.println("The seat has been successfully canceled");
-						seats[i][j].setIsavailable(true);
-						return;
-					} else{
-						System.out.println("Seat is already not booked");
-						return;
-						}
-				}
-			}
-		}
-		System.out.println("Not found the seat of this id");
+	public boolean cancelSeat(int row, int col) {
+		boolean isAvailable = false;
+    		for (int i = 0; i < seats.length; i++) {
+        		for (int j = 0; j < seats[i].length; j++) {
+            		if (seats[i][j] == seats[row][col]) {
+                			if (!seats[i][j].getIsavailable()) {
+                    			seats[i][j].setIsavailable(true);
+                    			isAvailable = true;
+                    			return isAvailable;
+                    			//System.out.println("The seat has been successfully canceled");
+               			 } else {
+                    			//System.out.println("Seat is already not booked");
+                    			return isAvailable; 
+               			 }
+          	  		}
+       		 }
+  	 	 }	
+    		//System.out.println("Seat with this ID not found");
+    		return isAvailable;
 	}
 	
 	//Count Total Number Of Seats
-	public void countTotalSeats(){
+	public int getTotalSeatCount(){
 		int totalSeatsCount = 0;
 		
 		for(int i = 0; i < seats.length; i++){
@@ -105,11 +134,11 @@ public class Screen{
 				totalSeatsCount++;
 			}	
 		}
-		System.out.println("Total Number of Seats Are: "+totalSeatsCount);
+		return totalSeatsCount;
 	}
 	
 	//Count total Available Seats	
-	public void countAvailableSeats(){
+	public int getAvailableSeatCount(){
 	
 		int totalAvailableCount = 0;
 		
@@ -119,7 +148,7 @@ public class Screen{
 					totalAvailableCount++;
 			}	
 		}
-		System.out.println("Total Available Seats Are: "+totalAvailableCount);
+		return totalAvailableCount;
 
 	
 	}
@@ -228,6 +257,30 @@ public class Screen{
 		}
 		return availableSeats;
 	}
+	
+	public void displayLayout(){
+		for(int i = 0; i < seats.length; i++){
+			for(int j = 0; j < seats[i].length; j++){
+				System.out.print(" [" + seats[i][j].getId() + ":" + seats[i][j].getIsavailable() + "]");
+			
+			}
+			System.out.println();
+			System.out.println();
+		
+		}
+	
+	}
+	
+	public void displayVerbose() {
+        System.out.println("  Screen: " + screenName);
+        for (int i = 0; i < seats.length; i++) {
+            System.out.print("   Row " + (i + 1) + ": ");
+            for (int j = 0; j < seats[i].length; j++) {
+                System.out.print(seats[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }	
 
 	
 	@Override
@@ -235,9 +288,11 @@ public class Screen{
 		StringBuilder str = new StringBuilder();
 		for(int i = 0; i < seats.length; i++){
 			str.append("\n");
-			str.append("===Row: "+(i+1)+"===\n");
+			//str.append("===Row: "+(i+1)+"===\n");
 			for(int j = 0; j < seats[i].length; j++){
-				str.append("Seat#: "+seats[i][j]);
+				//str.append("Seat#: "+seats[i][j]);
+				str.append(seats[i][j]);
+
 			}
 		}
 		return str.toString();
